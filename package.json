@@ -1,0 +1,33 @@
+{
+  "name": "Epayco",
+  "version": "0.0.1",
+  "description": "Epayco API client for node.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --timeout 10000 --require test/common test/*.js",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover _mocha -- test/*.js --require test/common --timeout 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/epaco/epayco-node.git"
+  },
+  "keywords": [
+    "Epayco",
+    "API"
+  ],
+  "author": "Epayco <jaguirre@payco.co> (https://epayco.co)",
+  "contributors": [
+    "Jonathan Aguirre <jaguirre@payco.co>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "debug": "2.1.0",
+    "request": "^2.81.0",
+    "superagent": "0.21.0"
+  },
+  "devDependencies": {
+    "better-assert": "1.0.2",
+    "mocha": "2.0.1",
+    "istanbul": "0.3.2"
+  }
+}
