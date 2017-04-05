@@ -1,5 +1,5 @@
 {
-    "name": "Epayco",
+    "name": "epayco-node",
     "version": "0.0.1",
     "description": "Epayco API client for node.js",
     "main": "lib/index.js",

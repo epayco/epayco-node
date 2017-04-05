@@ -17,7 +17,7 @@ $ npm install epayco-node
 ## Usage
 
 ```javascript
-var epayco = require('../lib')({
+var epayco = require('epayco-node')({
     apiKey: 'PUBLIC_KEY',
     privateKey: 'PRIVATE_KEY',
     lang: 'ES',
@@ -36,7 +36,7 @@ var credit_info = {
 }
 epayco.token.create(credit_info)
     .then(function(token) {
-        assert(token);
+        console.log(token);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -57,7 +57,7 @@ var customer_info = {
 }
 epayco.customers.create(customer_info)
     .then(function(customer) {
-        assert(customer);
+        console.log(customer);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -69,7 +69,7 @@ epayco.customers.create(customer_info)
 ```javascript
 epayco.customers.get("id_customer")
     .then(function(customer) {
-        assert(customer);
+        console.log(customer);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -81,7 +81,7 @@ epayco.customers.get("id_customer")
 ```javascript
 epayco.customers.list()
     .then(function(customers) {
-        assert(customers);
+        console.log(customers);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -96,7 +96,7 @@ var update_customer_info = {
 }
 epayco.customers.update("id_customer", update_customer_info)
     .then(function(customer) {
-        assert(customer);
+        console.log(customer);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -120,7 +120,7 @@ var plan_info = {
 }
 epayco.plans.create(plan_info)
     .then(function(plan) {
-        assert(plan);
+        console.log(plan);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -132,7 +132,7 @@ epayco.plans.create(plan_info)
 ```javascript
 epayco.plans.get("id_plan")
     .then(function(plan) {
-        assert(plan);
+        console.log(plan);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -144,7 +144,7 @@ epayco.plans.get("id_plan")
 ```javascript
 epayco.plans.list()
     .then(function(plans) {
-        assert(plans);
+        console.log(plans);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -156,7 +156,7 @@ epayco.plans.list()
 ```javascript
 epayco.plans.delete("id_plan")
     .then(function(plan) {
-        assert(plan);
+        console.log(plan);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -177,7 +177,7 @@ var subscription_info = {
 }
 epayco.subscriptions.create(subscription_info)
     .then(function(subscription) {
-        assert(subscription);
+        console.log(subscription);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -190,7 +190,7 @@ epayco.subscriptions.create(subscription_info)
 begin
 epayco.subscriptions.get("id_subscription")
     .then(function(subscription) {
-        assert(subscription);
+        console.log(subscription);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -202,7 +202,7 @@ epayco.subscriptions.get("id_subscription")
 ```javascript
 epayco.subscriptions.list()
     .then(function(subscriptions) {
-        assert(subscriptions);
+        console.log(subscriptions);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -214,7 +214,7 @@ epayco.subscriptions.list()
 ```javascript
 epayco.subscriptions.cancel("id_subscription")
     .then(function(subscription) {
-        assert(subscription);
+        console.log(subscription);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -233,7 +233,7 @@ var subscription_info = {
 }
 epayco.subscriptions.charge(subscription_info)
     .then(function(subscription) {
-        assert(subscription);
+        console.log(subscription);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -267,7 +267,7 @@ var pse_info = {
 }
 epayco.bank.create(pse_info)
     .then(function(bank) {
-        assert(bank);
+        console.log(bank);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -279,7 +279,7 @@ epayco.bank.create(pse_info)
 ```javascript
 epayco.bank.get("transaction_id")
     .then(function(bank) {
-        assert(bank);
+        console.log(bank);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -312,7 +312,7 @@ var cash_info = {
 }
 epayco.cash.create("efecty", cash_info)
     .then(function(cash) {
-        assert(cash);
+        console.log(cash);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -324,7 +324,7 @@ epayco.cash.create("efecty", cash_info)
 ```javascript
 epayco.cash.get("transaction_id")
     .then(function(cash) {
-        assert(cash);
+        console.log(cash);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -354,7 +354,7 @@ var payment_info = {
 }
 epayco.charge.create(payment_info)
     .then(function(charge) {
-        assert(charge);
+        console.log(charge);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -367,7 +367,7 @@ epayco.charge.create(payment_info)
 begin
 epayco.charge.get("transaction_id")
     .then(function(charge) {
-        assert(charge);
+        console.log(charge);
     })
     .catch(function(err) {
         console.log("err: " + err);
