@@ -364,7 +364,6 @@ epayco.charge.create(payment_info)
 #### Retrieve
 
 ```javascript
-begin
 epayco.charge.get("transaction_id")
     .then(function(charge) {
         console.log(charge);
