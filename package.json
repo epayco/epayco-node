@@ -17,14 +17,15 @@
     ],
     "author": "Epayco <jaguirre@payco.co> (https://epayco.co)",
     "contributors": [
-        "Jonathan Aguirre <jaguirre@payco.co>"
+        "Jonathan Aguirre <jaguirre@payco.co>",
+        "Jeison Caro <jeison.caro@payco.co>"
     ],
     "license": "MIT",
     "dependencies": {
         "crypto-js": "^3.1.9-1",
-        "debug": "2.1.0",
+        "debug": "2.6.9",
         "ip": "^1.1.5",
-        "superagent": "0.21.0"
+        "superagent": "^3.7.0"
     },
     "devDependencies": {
         "better-assert": "1.0.2",
