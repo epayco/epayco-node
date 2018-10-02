@@ -17,7 +17,7 @@ $ npm install epayco-node
 ## Usage
 
 ```javascript
-var epayco = require('epayco-node')({
+const epayco = require('epayco-node')({
     apiKey: 'PUBLIC_KEY',
     privateKey: 'PRIVATE_KEY',
     lang: 'ES',
@@ -28,19 +28,30 @@ var epayco = require('epayco-node')({
 ### Create Token
 
 ```javascript
-var credit_info = {
+const credit_info = {
     "card[number]": "4575623182290326",
     "card[exp_year]": "2017",
     "card[exp_month]": "07",
     "card[cvc]": "123"
 }
+
 epayco.token.create(credit_info)
-    .then(function(token) {
-        console.log(token);
+    .then(token => {
+        console.info(token);
     })
-    .catch(function(err) {
-        console.log("err: " + err);
+    .catch(err => {
+        console.error(`Error: ${err}`);
     });
+
+// (async/await)
+try {
+    const tokenPromise = epayco.token.create(credit_info)
+    const token = await tokenPromise
+    console.info(token)
+} catch(error) {
+    console.error(`Error: ${err}`);
+}
+
 ```
 
 ### Customers
@@ -48,7 +59,7 @@ epayco.token.create(credit_info)
 #### Create
 
 ```javascript
-var customer_info = {
+const customer_info = {
     token_card: "toke_id",
     name: "Joe Doe",
     email: "joe@payco.co",
@@ -56,12 +67,22 @@ var customer_info = {
     default: true
 }
 epayco.customers.create(customer_info)
-    .then(function(customer) {
-        console.log(customer);
+    .then(customer => {
+        console.log(customer)
     })
-    .catch(function(err) {
-        console.log("err: " + err);
+    .catch(err => {
+        console.error(`Error: ${err}`);
     });
+
+// (async/await)
+try {
+    const customerPromise = epayco.customers.create(customer_info)
+    const customer = await customerPromise
+    console.info(customer)
+} catch(error) {
+    console.error(`Error: ${err}`);
+}
+
 ```
 
 #### Retrieve
