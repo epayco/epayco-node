@@ -52,8 +52,12 @@ var customer_info = {
     token_card: "toke_id",
     name: "Joe Doe",
     email: "joe@payco.co",
-    phone: "3005234321",
-    default: true
+    default: true,
+    //Optional parameters: These parameters are important when validating the credit card transaction
+    "city" => "Bogota",
+    "address" => "Cr 4 # 55 36",
+    "phone" => "3005234321",
+    "cell_phone"=> "3010000001",
 }
 epayco.customers.create(customer_info)
     .then(function(customer) {
@@ -331,6 +335,31 @@ epayco.cash.get("transaction_id")
     });
 ```
 
+#### Split Payments
+
+Previous requirements:
+https://docs.epayco.co/tools/split-payment
+
+```javascript
+var split_cash_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "10",
+    split_receivers: JSON.stringify([{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}])
+}
+epayco.cash.create("efecty", split_cash_info)
+    .then(function(cash) {
+        console.log(cash);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
 ### Payment
 
 #### Create
@@ -365,6 +394,30 @@ epayco.charge.create(payment_info)
 
 ```javascript
 epayco.charge.get("transaction_id")
+    .then(function(charge) {
+        console.log(charge);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+#### Split Payments
+
+Previous requirements:
+https://docs.epayco.co/tools/split-payment
+
+```javascript
+var split_payment_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "10",
+    split_receivers: [{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}]
+}
+epayco.charge.create(split_payment_info)
     .then(function(charge) {
         console.log(charge);
     })
