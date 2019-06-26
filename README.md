@@ -268,6 +268,14 @@ var pse_info = {
     url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     method_confirmation: "GET",
+    //Extra params: These params are optional and can be used by the commerce
+    extra1: "",
+    extra2: "",
+    extra3: "",
+    extra4: "",
+    extra5: "",
+    extra6: "",
+    extra7: "",
 }
 epayco.bank.create(pse_info)
     .then(function(bank) {
