@@ -387,7 +387,16 @@ var payment_info = {
     tax: "16000",
     tax_base: "100000",
     currency: "COP",
-    dues: "12"
+    dues: "12",
+    //Extra params: These params are optional and can be used by the commerce
+    extras: {
+        extra1: "",
+        extra2: "",
+        extra3: "",
+        extra4: "",
+        extra5: "",
+        extra6: ""
+    }
 }
 epayco.charge.create(payment_info)
     .then(function(charge) {
