@@ -50,7 +50,8 @@ epayco.token.create(credit_info)
 ```javascript
 var customer_info = {
     token_card: "toke_id",
-    name: "Joe Doe",
+    name: "Joe",
+    last_name: "Doe", //This parameter is optional
     email: "joe@payco.co",
     default: true,
     //Optional parameters: These parameters are important when validating the credit card transaction
