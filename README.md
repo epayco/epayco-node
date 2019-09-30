@@ -192,7 +192,6 @@ epayco.subscriptions.create(subscription_info)
 #### Retrieve
 
 ```javascript
-begin
 epayco.subscriptions.get("id_subscription")
     .then(function(subscription) {
         console.log(subscription);
