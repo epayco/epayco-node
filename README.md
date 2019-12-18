@@ -30,8 +30,8 @@ var epayco = require('epayco-node')({
 ```javascript
 var credit_info = {
     "card[number]": "4575623182290326",
-    "card[exp_year]": "2017",
-    "card[exp_month]": "07",
+    "card[exp_year]": "2025",
+    "card[exp_month]": "12",
     "card[cvc]": "123"
 }
 epayco.token.create(credit_info)
@@ -107,6 +107,24 @@ epayco.customers.update("id_customer", update_customer_info)
         console.log("err: " + err);
     });
 ```
+
+#### Delete Token
+
+```javascript
+var delete_customer_info = {
+    franchise : "visa",
+    mask : "457562******0326",
+    customer_id:"id_customer"
+}
+epayco.customers.delete(delete_customer_info)
+    .then(function(customer) {
+        console.log(customer);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
 
 ### Plans
 
