@@ -15,10 +15,11 @@
         "Epayco",
         "API"
     ],
-    "author": "Epayco <jaguirre@payco.co> (https://epayco.co)",
+    "author": "Epayco <ricardo.saldarriaga@payco.co> (https://epayco.co)",
     "contributors": [
         "Jonathan Aguirre <jaguirre@payco.co>",
-        "Jeison Caro <jeison.caro@payco.co>"
+        "Jeison Caro <jeison.caro@payco.co>",
+        "Ricardo Saldarriaga <ricardo.saldarriaga@payco.co>"
     ],
     "license": "MIT",
     "dependencies": {
