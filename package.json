@@ -1,6 +1,6 @@
 {
     "name": "epayco-node",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Epayco API client for node.js",
     "main": "lib/index.js",
     "scripts": {
@@ -15,10 +15,11 @@
         "Epayco",
         "API"
     ],
-    "author": "Epayco <jaguirre@payco.co> (https://epayco.co)",
+    "author": "Epayco <ricardo.saldarriaga@payco.co> (https://epayco.co)",
     "contributors": [
         "Jonathan Aguirre <jaguirre@payco.co>",
-        "Jeison Caro <jeison.caro@payco.co>"
+        "Jeison Caro <jeison.caro@payco.co>",
+        "Ricardo Saldarriaga <ricardo.saldarriaga@payco.co>"
     ],
     "license": "MIT",
     "dependencies": {
