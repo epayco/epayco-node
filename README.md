@@ -251,7 +251,8 @@ var subscription_info = {
     customer: "id_customer",
     token_card: "id_token",
     doc_type: "CC",
-    doc_number: "5234567"
+    doc_number: "5234567",
+    ip:"190.000.000.000" /*This is the client's IP, it is required */
 }
 epayco.subscriptions.charge(subscription_info)
     .then(function(subscription) {
@@ -406,6 +407,7 @@ var payment_info = {
     tax_base: "100000",
     currency: "COP",
     dues: "12",
+    ip:"190.000.000.000", /*This is the client's IP, it is required */
     //Extra params: These params are optional and can be used by the commerce
     extras: {
         extra1: "",
