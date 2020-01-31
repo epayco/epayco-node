@@ -196,7 +196,10 @@ var subscription_info = {
     customer: "id_customer",
     token_card: "id_token",
     doc_type: "CC",
-    doc_number: "5234567"
+    doc_number: "5234567",
+    //Optional parameter: if these parameter it's not send, system get ePayco dashboard's url_confirmation
+    url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    method_confirmation: "POST",
 }
 epayco.subscriptions.create(subscription_info)
     .then(function(subscription) {
