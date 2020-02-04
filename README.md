@@ -339,7 +339,7 @@ var cash_info = {
     last_name: "PAYCO",
     email: "test@mailinator.com",
     cell_phone: "3010000001",
-    end_date: "2017-12-05",
+    end_date: "2020-12-05",
     url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     method_confirmation: "GET",
@@ -483,7 +483,7 @@ epayco.charge.create(split_payment_info)
 #### Create
 
 ```javascript
-var payment_info = {
+var safetypay_info = {
     invoice: "1472050778",
     description: "pay test",
     value: "20000",
@@ -502,7 +502,7 @@ var payment_info = {
     url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     method_confirmation: "GET",
 }
-epayco.safetypay.create(payment_info)
+epayco.safetypay.create(safetypay_info)
     .then(function(done) {
         console.log(done);
     })
