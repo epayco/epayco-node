@@ -432,6 +432,9 @@ var payment_info = {
     tax_base: "100000",
     currency: "COP",
     dues: "12",
+    url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    method_confirmation: "GET",
     ip:"190.000.000.000", /*This is the client's IP, it is required */
     //Extra params: These params are optional and can be used by the commerce
     use_default_card_customer: true,/*if the user wants to be charged with the card that the customer currently has as default = true*/
