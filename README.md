@@ -290,14 +290,16 @@ var pse_info = {
     url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     method_confirmation: "GET",
+    ip:"190.000.000.000", /*This is the client's IP, it is required */
     //Extra params: These params are optional and can be used by the commerce
-    extra1: "",
-    extra2: "",
-    extra3: "",
-    extra4: "",
-    extra5: "",
-    extra6: "",
-    extra7: "",
+    extras: {
+        extra1: "",
+        extra2: "",
+        extra3: "",
+        extra4: "",
+        extra5: "",
+        extra6: ""
+    }
 }
 epayco.bank.create(pse_info)
     .then(function(bank) {
@@ -343,6 +345,16 @@ var cash_info = {
     url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
     method_confirmation: "GET",
+    ip:"190.000.000.000", /*This is the client's IP, it is required */
+    //Extra params: These params are optional and can be used by the commerce
+    extras: {
+        extra1: "",
+        extra2: "",
+        extra3: "",
+        extra4: "",
+        extra5: "",
+        extra6: ""
+    }
 }
 epayco.cash.create("efecty", cash_info)
     .then(function(cash) {
@@ -422,6 +434,7 @@ var payment_info = {
     dues: "12",
     ip:"190.000.000.000", /*This is the client's IP, it is required */
     //Extra params: These params are optional and can be used by the commerce
+    use_default_card_customer: true,/*if the user wants to be charged with the card that the customer currently has as default = true*/
     extras: {
         extra1: "",
         extra2: "",
@@ -477,4 +490,37 @@ epayco.charge.create(split_payment_info)
 ```
 
 
+
+### Safetypay
+
+#### Create
+
+```javascript
+var safetypay_info = {
+    invoice: "1472050778",
+    description: "pay test",
+    value: "20000",
+    tax: "0",
+    tax_base: "20000",
+    currency: "COP",
+    type_person: "0",
+    doc_type: "CC",
+    doc_number: "10358519",
+    name: "testing",
+    last_name: "PAYCO",
+    email: "test@mailinator.com",
+    cell_phone: "3010000001",
+    end_date: "2020-02-05",
+    url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    method_confirmation: "GET",
+}
+epayco.safetypay.create(safetypay_info)
+    .then(function(done) {
+        console.log(done);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
 
