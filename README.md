@@ -321,6 +321,31 @@ epayco.bank.get("transaction_id")
         console.log("err: " + err);
     });
 ```
+#### Split Payments
+
+Previous requirements:
+https://docs.epayco.co/tools/split-payment
+
+```javascript
+var split_payment_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "10",
+    split_receivers: [{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}]
+}
+epayco.bank.create(split_payment_info)
+    .then(function(charge) {
+        console.log(charge);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
 
 ### Cash
 
