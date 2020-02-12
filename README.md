@@ -126,6 +126,25 @@ epayco.customers.delete(delete_customer_info)
 ```
 
 
+#### Add new token default to card existed
+
+```javascript
+var addDefaultCard_customer = {
+    franchise : "visa",
+    token : "**********zL4gFB",
+    mask : "457562******0326",
+    customer_id:"id_customer"
+}
+epayco.customers.addDefaultCard(addDefaultCard_customer)
+    .then(function(customer) {
+        console.log(customer);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
+
 ### Plans
 
 #### Create
