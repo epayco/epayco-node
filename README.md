@@ -11,7 +11,7 @@ API to interact with Epayco <https://epayco.co/docs/api/>
 As usual, you can install it using npm.
 
 ```
-$ npm install epayco-node
+$ npm i epayco-sdk-node
 ```
 
 ## Usage
@@ -540,7 +540,4 @@ epayco.charge.create(split_payment_info)
         console.log("err: " + err);
     });
 ```
-
-
-
 
