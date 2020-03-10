@@ -17,7 +17,7 @@ $ npm i epayco-sdk-node
 ## Usage
 
 ```javascript
-var epayco = require('epayco-node')({
+var epayco = require('epayco-sdk-node')({
     apiKey: 'PUBLIC_KEY',
     privateKey: 'PRIVATE_KEY',
     lang: 'ES',
