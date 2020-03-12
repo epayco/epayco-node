@@ -144,6 +144,22 @@ epayco.customers.addDefaultCard(addDefaultCard_customer)
     });
 ```
 
+#### add new token to customer existed
+
+```javascript
+var add_customer_info = {
+    token_card : "FevpWP4fwB4v6NMG2",
+    customer_id:"id_customer"
+}
+epayco.customers.addNewToken(add_customer_info)
+    .then(function(customer) {
+        console.log(customer);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
 
 ### Plans
 
@@ -540,4 +556,6 @@ epayco.charge.create(split_payment_info)
         console.log("err: " + err);
     });
 ```
+
+
 
