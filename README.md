@@ -233,7 +233,7 @@ var subscription_info = {
     doc_type: "CC",
     doc_number: "5234567",
     //Optional parameter: if these parameter it's not send, system get ePayco dashboard's url_confirmation
-    url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "POST",
 }
 epayco.subscriptions.create(subscription_info)
@@ -323,19 +323,18 @@ var pse_info = {
     country: "CO",
     cell_phone: "3010000001",
     ip:"190.000.000.000", /*This is the client's IP, it is required */
-    url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
-    url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    url_response: "https://ejemplo.com/respuesta.html",
+    url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
 
     //Extra params: These params are optional and can be used by the commerce
-    extras: {
         extra1: "",
         extra2: "",
         extra3: "",
         extra4: "",
         extra5: "",
         extra6: ""
-    }
+    
 }
 epayco.bank.create(pse_info)
     .then(function(bank) {
@@ -404,8 +403,8 @@ var cash_info = {
     cell_phone: "3010000001",
     end_date: "2020-12-05",
     ip:"190.000.000.000", /*This is the client's IP, it is required */
-    url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
-    url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    url_response: "https://ejemplo.com/respuesta.html",
+    url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
 
     //Extra params: These params are optional and can be used by the commerce
@@ -495,8 +494,8 @@ var payment_info = {
     currency: "COP",
     dues: "12",
     ip:"190.000.000.000", /*This is the client's IP, it is required */
-    url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
-    url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    url_response: "https://ejemplo.com/respuesta.html",
+    url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
 
     //Extra params: These params are optional and can be used by the commerce
@@ -556,6 +555,7 @@ epayco.charge.create(split_payment_info)
         console.log("err: " + err);
     });
 ```
+
 
 
 
