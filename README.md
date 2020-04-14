@@ -557,5 +557,3 @@ epayco.charge.create(split_payment_info)
 ```
 
 
-
-
