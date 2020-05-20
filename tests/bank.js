@@ -44,4 +44,16 @@ describe('Bank', function() {
         });
     });
 
+    describe('#BankList', function() {
+        it('Retrieve bank list PSE', function(done) {
+            epayco.bank.bankList()
+                .then(function(banks) {
+                    assert(banks);
+                })
+                .catch(function(err) {
+                    console.log("err: " + err);
+                });
+        });
+    });
+
 });

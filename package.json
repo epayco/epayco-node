@@ -1,5 +1,5 @@
 {
-    "name": "epayco-node",
+    "name": "epayco-sdk-node",
     "version": "0.0.8",
     "description": "Epayco API client for node.js",
     "main": "lib/index.js",
