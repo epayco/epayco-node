@@ -446,6 +446,7 @@ epayco.cash.create("gana", cash_info)
 epayco.cash.create("baloto", cash_info)//expiration date can not be longer than 30 days
 epayco.cash.create("redservi", cash_info)//expiration date can not be longer than 30 days
 epayco.cash.create("puntored", cash_info)//expiration date can not be longer than 30 days
+epayco.cash.create("sured", cash_info)//expiration date can not be longer than 30 days
 ```
 
 #### Split Payments
@@ -486,6 +487,10 @@ var payment_info = {
     name: "John",
     last_name: "Doe",
     email: "example@email.com",
+    city: "Bogota",
+    address: "Cr 4 # 55 36",
+    phone: "3005234321",
+    cell_phone: "3010000001"
     bill: "OR-1234",
     description: "Test Payment",
     value: "116000",
