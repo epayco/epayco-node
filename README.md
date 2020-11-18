@@ -370,7 +370,11 @@ var split_payment_info = {
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "10",
-    split_receivers: [{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}]
+    split_rule: "multiple",
+    split_receivers: [
+                        {id:"P_CUST_ID_CLIENTE",total:"116000",iva:"16000",
+                        base_iva:"100000", fee:"20000"
+                    }]
 }
 epayco.bank.create(split_payment_info)
     .then(function(charge) {
@@ -463,7 +467,11 @@ var split_cash_info = {
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "10",
-    split_receivers: JSON.stringify([{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}])
+    split_rule: "multiple",
+    split_receivers: [
+                        {id:"P_CUST_ID_CLIENTE",total:"116000",iva:"16000",
+                        base_iva:"100000", fee:"20000"
+                    }]
 }
 epayco.cash.create("efecty", split_cash_info)
     .then(function(cash) {
@@ -550,7 +558,11 @@ var split_payment_info = {
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "10",
-    split_receivers: [{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}]
+    split_rule: "multiple",
+    split_receivers: [
+                        {id:"P_CUST_ID_CLIENTE",total:"116000",iva:"16000",
+                        base_iva:"100000", fee:"20000"
+                    }]
 }
 epayco.charge.create(split_payment_info)
     .then(function(charge) {
