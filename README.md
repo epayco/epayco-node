@@ -231,7 +231,7 @@ var subscription_info = {
     customer: "id_customer",
     token_card: "id_token",
     doc_type: "CC",
-    doc_number: "5234567",
+    doc_number: "0000000000",
     //Optional parameter: if these parameter it's not send, system get ePayco dashboard's url_confirmation
     url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "POST",
@@ -289,7 +289,7 @@ var subscription_info = {
     customer: "id_customer",
     token_card: "id_token",
     doc_type: "CC",
-    doc_number: "5234567",
+    doc_number: "0000000000",
     ip:"190.000.000.000" /*This is the client's IP, it is required */
 }
 epayco.subscriptions.charge(subscription_info)
@@ -316,7 +316,7 @@ var pse_info = {
     currency: "COP",
     type_person: "0",
     doc_type: "CC",
-    doc_number: "10358519",
+    doc_number: "0000000000",
     name: "testing",
     last_name: "PAYCO",
     email: "no-responder@payco.co",
@@ -400,12 +400,12 @@ var cash_info = {
     currency: "COP",
     type_person: "0",
     doc_type: "CC",
-    doc_number: "10358519",
+    doc_number: "0000000000",
     name: "testing",
     last_name: "PAYCO",
     email: "test@mailinator.com",
     cell_phone: "3010000001",
-    end_date: "2020-12-05",
+    end_date: "2020-12-31",
     ip:"190.000.000.000", /*This is the client's IP, it is required */
     url_response: "https://ejemplo.com/respuesta.html",
     url_confirmation: "https://ejemplo.com/confirmacion",
@@ -491,7 +491,7 @@ var payment_info = {
     token_card: "token_id",
     customer_id: "customer_id",
     doc_type: "CC",
-    doc_number: "1035851980",
+    doc_number: "0000000000",
     name: "John",
     last_name: "Doe",
     email: "example@email.com",
