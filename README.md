@@ -361,6 +361,7 @@ epayco.bank.get("transaction_id")
 Previous requirements:
 https://docs.epayco.co/tools/split-payment
 
+#### Split 1-1
 ```javascript
 var split_payment_info = {
     //Other customary parameters...
@@ -370,7 +371,7 @@ var split_payment_info = {
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "10",
-    split_receivers: [{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}]
+    split_receivers: JSON.stringify([{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}])
 }
 epayco.bank.create(split_payment_info)
     .then(function(charge) {
@@ -380,7 +381,32 @@ epayco.bank.create(split_payment_info)
         console.log("err: " + err);
     });
 ```
+#### Split Multiple:
+use the following attributes in case you need to do a dispersion with multiple providers
 
+```javascript
+var split_payment_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "0",
+    split_rule: "multiple",
+    split_receivers: JSON.stringify([
+        {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
+        {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
+    ])
+}
+epayco.bank.create(split_payment_info)
+    .then(function(charge) {
+        console.log(charge);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
 
 ### Cash
 
@@ -453,7 +479,7 @@ epayco.cash.create("sured", cash_info)//expiration date can not be longer than 3
 
 Previous requirements:
 https://docs.epayco.co/tools/split-payment
-
+#### Split 1-1
 ```javascript
 var split_cash_info = {
     //Other customary parameters...
@@ -473,6 +499,34 @@ epayco.cash.create("efecty", split_cash_info)
         console.log("err: " + err);
     });
 ```
+#### Split Multiple:
+use the following attributes in case you need to do a dispersion with multiple providers
+
+```javascript
+var split_payment_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "0",
+    split_rule: "multiple",
+    split_receivers: JSON.stringify([
+        {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
+        {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
+    ])
+}
+epayco.cash.create("efecty", split_cash_info)
+    .then(function(cash) {
+        console.log(cash);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
+
 
 ### Payment
 
@@ -541,6 +595,8 @@ epayco.charge.get("transaction_id")
 Previous requirements:
 https://docs.epayco.co/tools/split-payment
 
+#### Split 1-1
+
 ```javascript
 var split_payment_info = {
     //Other customary parameters...
@@ -550,7 +606,7 @@ var split_payment_info = {
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "10",
-    split_receivers: [{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}]
+    split_receivers: JSON.stringify([{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}])
 }
 epayco.charge.create(split_payment_info)
     .then(function(charge) {
@@ -561,4 +617,30 @@ epayco.charge.create(split_payment_info)
     });
 ```
 
+#### Split Multiple:
+use the following attributes in case you need to do a dispersion with multiple providers
+
+```javascript
+var split_payment_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "0",
+    split_rule: "multiple",
+    split_receivers: JSON.stringify([
+        {id:"69205",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
+        {id:"75470",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
+    ])
+}
+epayco.charge.create(split_payment_info)
+    .then(function(charge) {
+        console.log(charge);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
 
