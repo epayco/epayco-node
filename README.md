@@ -631,8 +631,8 @@ var split_payment_info = {
     split_primary_receiver_fee: "0",
     split_rule: "multiple",
     split_receivers: JSON.stringify([
-        {id:"69205",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
-        {id:"75470",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
+        {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
+        {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
     ])
 }
 epayco.charge.create(split_payment_info)
