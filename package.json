@@ -27,7 +27,9 @@
         "debug": "2.6.9",
         "ip": "^1.1.5",
         "node-fetch": "^2.6.0",
-        "superagent": "^3.7.0"
+        "superagent": "^3.7.0",
+        "dotenv": "^8.2.0",
+        "getenv": "^1.0.0"
     },
     "devDependencies": {
         "better-assert": "1.0.2",
