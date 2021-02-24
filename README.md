@@ -348,7 +348,7 @@ epayco.bank.create(pse_info)
 #### Retrieve
 
 ```javascript
-epayco.bank.get("transaction_id")
+epayco.bank.get("codigo_recibo")
     .then(function(bank) {
         console.log(bank);
     })
