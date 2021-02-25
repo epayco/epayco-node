@@ -11,13 +11,13 @@ API to interact with Epayco <https://epayco.co/docs/api/>
 As usual, you can install it using npm.
 
 ```
-$ npm install epayco-node
+$ npm i epayco-sdk-node@1.0.6
 ```
 
 ## Usage
 
 ```javascript
-var epayco = require('epayco-node')({
+var epayco = require('epayco-sdk-node')({
     apiKey: 'PUBLIC_KEY',
     privateKey: 'PRIVATE_KEY',
     lang: 'ES',
@@ -30,8 +30,8 @@ var epayco = require('epayco-node')({
 ```javascript
 var credit_info = {
     "card[number]": "4575623182290326",
-    "card[exp_year]": "2017",
-    "card[exp_month]": "07",
+    "card[exp_year]": "2025",
+    "card[exp_month]": "12",
     "card[cvc]": "123"
 }
 epayco.token.create(credit_info)
@@ -50,7 +50,8 @@ epayco.token.create(credit_info)
 ```javascript
 var customer_info = {
     token_card: "toke_id",
-    name: "Joe Doe",
+    name: "Joe",
+    last_name: "Doe", 
     email: "joe@payco.co",
     default: true,
     //Optional parameters: These parameters are important when validating the credit card transaction
@@ -106,6 +107,59 @@ epayco.customers.update("id_customer", update_customer_info)
         console.log("err: " + err);
     });
 ```
+
+#### Delete Token
+
+```javascript
+var delete_customer_info = {
+    franchise : "visa",
+    mask : "457562******0326",
+    customer_id:"id_customer"
+}
+epayco.customers.delete(delete_customer_info)
+    .then(function(customer) {
+        console.log(customer);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
+
+#### Add new token default to card existed
+
+```javascript
+var addDefaultCard_customer = {
+    franchise : "visa",
+    token : "**********zL4gFB",
+    mask : "457562******0326",
+    customer_id:"id_customer"
+}
+epayco.customers.addDefaultCard(addDefaultCard_customer)
+    .then(function(customer) {
+        console.log(customer);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
+#### add new token to customer existed
+
+```javascript
+var add_customer_info = {
+    token_card : "FevpWP4fwB4v6NMG2",
+    customer_id:"id_customer"
+}
+epayco.customers.addNewToken(add_customer_info)
+    .then(function(customer) {
+        console.log(customer);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
 
 ### Plans
 
@@ -177,7 +231,10 @@ var subscription_info = {
     customer: "id_customer",
     token_card: "id_token",
     doc_type: "CC",
-    doc_number: "5234567"
+    doc_number: "5234567",
+    //Optional parameter: if these parameter it's not send, system get ePayco dashboard's url_confirmation
+    url_confirmation: "https://ejemplo.com/confirmacion",
+    method_confirmation: "POST",
 }
 epayco.subscriptions.create(subscription_info)
     .then(function(subscription) {
@@ -191,7 +248,6 @@ epayco.subscriptions.create(subscription_info)
 #### Retrieve
 
 ```javascript
-begin
 epayco.subscriptions.get("id_subscription")
     .then(function(subscription) {
         console.log(subscription);
@@ -233,7 +289,8 @@ var subscription_info = {
     customer: "id_customer",
     token_card: "id_token",
     doc_type: "CC",
-    doc_number: "5234567"
+    doc_number: "5234567",
+    ip:"190.000.000.000" /*This is the client's IP, it is required */
 }
 epayco.subscriptions.charge(subscription_info)
     .then(function(subscription) {
@@ -265,17 +322,19 @@ var pse_info = {
     email: "no-responder@payco.co",
     country: "CO",
     cell_phone: "3010000001",
-    url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
-    url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    ip:"190.000.000.000", /*This is the client's IP, it is required */
+    url_response: "https://ejemplo.com/respuesta.html",
+    url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
+
     //Extra params: These params are optional and can be used by the commerce
-    extra1: "",
-    extra2: "",
-    extra3: "",
-    extra4: "",
-    extra5: "",
-    extra6: "",
-    extra7: "",
+        extra1: "",
+        extra2: "",
+        extra3: "",
+        extra4: "",
+        extra5: "",
+        extra6: ""
+    
 }
 epayco.bank.create(pse_info)
     .then(function(bank) {
@@ -289,9 +348,60 @@ epayco.bank.create(pse_info)
 #### Retrieve
 
 ```javascript
-epayco.bank.get("transaction_id")
+epayco.bank.get("ticketId")
     .then(function(bank) {
         console.log(bank);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+#### Split Payments
+
+Previous requirements:
+https://docs.epayco.co/tools/split-payment
+
+#### Split 1-1
+```javascript
+var split_payment_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "10",
+    split_receivers: JSON.stringify([{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}])
+}
+epayco.bank.create(split_payment_info)
+    .then(function(charge) {
+        console.log(charge);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+#### Split Multiple:
+use the following attributes in case you need to do a dispersion with multiple providers
+
+```javascript
+var split_payment_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "0",
+    split_rule: "multiple",
+    split_receivers: JSON.stringify([
+        {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
+        {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
+    ])
+}
+epayco.bank.create(split_payment_info)
+    .then(function(charge) {
+        console.log(charge);
     })
     .catch(function(err) {
         console.log("err: " + err);
@@ -317,10 +427,21 @@ var cash_info = {
     last_name: "PAYCO",
     email: "test@mailinator.com",
     cell_phone: "3010000001",
-    end_date: "2017-12-05",
-    url_response: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
-    url_confirmation: "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+    end_date: "2020-12-05",
+    ip:"190.000.000.000", /*This is the client's IP, it is required */
+    url_response: "https://ejemplo.com/respuesta.html",
+    url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
+
+    //Extra params: These params are optional and can be used by the commerce
+    extras: {
+        extra1: "",
+        extra2: "",
+        extra3: "",
+        extra4: "",
+        extra5: "",
+        extra6: ""
+    }
 }
 epayco.cash.create("efecty", cash_info)
     .then(function(cash) {
@@ -343,11 +464,22 @@ epayco.cash.get("transaction_id")
     });
 ```
 
+#### list
+
+```javascript
+epayco.cash.create("efecty", cash_info)
+epayco.cash.create("gana", cash_info) 
+epayco.cash.create("baloto", cash_info)//expiration date can not be longer than 30 days
+epayco.cash.create("redservi", cash_info)//expiration date can not be longer than 30 days
+epayco.cash.create("puntored", cash_info)//expiration date can not be longer than 30 days
+epayco.cash.create("sured", cash_info)//expiration date can not be longer than 30 days
+```
+
 #### Split Payments
 
 Previous requirements:
 https://docs.epayco.co/tools/split-payment
-
+#### Split 1-1
 ```javascript
 var split_cash_info = {
     //Other customary parameters...
@@ -367,6 +499,34 @@ epayco.cash.create("efecty", split_cash_info)
         console.log("err: " + err);
     });
 ```
+#### Split Multiple:
+use the following attributes in case you need to do a dispersion with multiple providers
+
+```javascript
+var split_payment_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "0",
+    split_rule: "multiple",
+    split_receivers: JSON.stringify([
+        {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
+        {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
+    ])
+}
+epayco.cash.create("efecty", split_cash_info)
+    .then(function(cash) {
+        console.log(cash);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
+
 
 ### Payment
 
@@ -381,6 +541,10 @@ var payment_info = {
     name: "John",
     last_name: "Doe",
     email: "example@email.com",
+    city: "Bogota",
+    address: "Cr 4 # 55 36",
+    phone: "3005234321",
+    cell_phone: "3010000001"
     bill: "OR-1234",
     description: "Test Payment",
     value: "116000",
@@ -388,8 +552,16 @@ var payment_info = {
     tax_base: "100000",
     currency: "COP",
     dues: "12",
+    ip:"190.000.000.000", /*This is the client's IP, it is required */
+    url_response: "https://ejemplo.com/respuesta.html",
+    url_confirmation: "https://ejemplo.com/confirmacion",
+    method_confirmation: "GET",
+
     //Extra params: These params are optional and can be used by the commerce
-    extras: {
+
+    use_default_card_customer: true,/*if the user wants to be charged with the card that the customer currently has as default = true*/
+   
+   extras: {
         extra1: "",
         extra2: "",
         extra3: "",
@@ -423,6 +595,8 @@ epayco.charge.get("transaction_id")
 Previous requirements:
 https://docs.epayco.co/tools/split-payment
 
+#### Split 1-1
+
 ```javascript
 var split_payment_info = {
     //Other customary parameters...
@@ -432,7 +606,7 @@ var split_payment_info = {
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "10",
-    split_receivers: [{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}]
+    split_receivers: JSON.stringify([{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}])
 }
 epayco.charge.create(split_payment_info)
     .then(function(charge) {
@@ -442,3 +616,31 @@ epayco.charge.create(split_payment_info)
         console.log("err: " + err);
     });
 ```
+
+#### Split Multiple:
+use the following attributes in case you need to do a dispersion with multiple providers
+
+```javascript
+var split_payment_info = {
+    //Other customary parameters...
+    splitpayment: "true",
+    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
+    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
+    split_type: "02",
+    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
+    split_primary_receiver_fee: "0",
+    split_rule: "multiple",
+    split_receivers: JSON.stringify([
+        {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
+        {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
+    ])
+}
+epayco.charge.create(split_payment_info)
+    .then(function(charge) {
+        console.log(charge);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
