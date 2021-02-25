@@ -348,7 +348,7 @@ epayco.bank.create(pse_info)
 #### Retrieve
 
 ```javascript
-epayco.bank.get("codigo_recibo")
+epayco.bank.get("ticketId")
     .then(function(bank) {
         console.log(bank);
     })
