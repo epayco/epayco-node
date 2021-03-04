@@ -4,7 +4,7 @@ Node wrapper for Epayco API
 
 ## Description
 
-API to interact with Epayco <https://epayco.co/docs/api/>
+API to interact with Epayco <https://api.epayco.co>
 
 ## Installation
 
