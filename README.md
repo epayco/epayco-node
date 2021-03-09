@@ -544,7 +544,7 @@ var payment_info = {
     city: "Bogota",
     address: "Cr 4 # 55 36",
     phone: "3005234321",
-    cell_phone: "3010000001"
+    cell_phone: "3010000001",
     bill: "OR-1234",
     description: "Test Payment",
     value: "116000",
