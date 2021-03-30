@@ -535,7 +535,7 @@ var payment_info = {
     token_card: "token_id",
     customer_id: "customer_id",
     doc_type: "CC",
-    doc_number: "1035851980",
+    doc_number: "10358519",
     name: "John",
     last_name: "Doe",
     email: "example@email.com",
