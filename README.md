@@ -4,14 +4,14 @@ Node wrapper for Epayco API
 
 ## Description
 
-API to interact with Epayco <https://epayco.co/docs/api/>
+API to interact with Epayco <https://api.epayco.co>
 
 ## Installation
 
 As usual, you can install it using npm.
 
 ```
-$ npm i epayco-sdk-node@1.0.6
+$ npm i epayco-sdk-node
 ```
 
 ## Usage
@@ -370,8 +370,7 @@ var split_payment_info = {
     split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
-    split_primary_receiver_fee: "10",
-    split_receivers: JSON.stringify([{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}])
+    split_primary_receiver_fee: "10"
 }
 epayco.bank.create(split_payment_info)
     .then(function(charge) {
@@ -393,11 +392,11 @@ var split_payment_info = {
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "0",
-    split_rule: "multiple",
+    split_rule: "multiple", // si se envía este parámetro split_receivers se vuelve obligatorio
     split_receivers: JSON.stringify([
         {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
         {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
-    ])
+    ]) // Campo obligatorio sí se envía el split_rule
 }
 epayco.bank.create(split_payment_info)
     .then(function(charge) {
@@ -488,8 +487,7 @@ var split_cash_info = {
     split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
-    split_primary_receiver_fee: "10",
-    split_receivers: JSON.stringify([{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}])
+    split_primary_receiver_fee: "10"
 }
 epayco.cash.create("efecty", split_cash_info)
     .then(function(cash) {
@@ -511,11 +509,11 @@ var split_payment_info = {
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "0",
-    split_rule: "multiple",
+    split_rule: "multiple",// si se envía este campo el campo split_receivers sería obligatorio
     split_receivers: JSON.stringify([
         {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
         {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
-    ])
+    ]) // Campo obligatorio sí se envía el campo split_rule
 }
 epayco.cash.create("efecty", split_cash_info)
     .then(function(cash) {
@@ -537,14 +535,14 @@ var payment_info = {
     token_card: "token_id",
     customer_id: "customer_id",
     doc_type: "CC",
-    doc_number: "1035851980",
+    doc_number: "10358519",
     name: "John",
     last_name: "Doe",
     email: "example@email.com",
     city: "Bogota",
     address: "Cr 4 # 55 36",
     phone: "3005234321",
-    cell_phone: "3010000001"
+    cell_phone: "3010000001",
     bill: "OR-1234",
     description: "Test Payment",
     value: "116000",
@@ -605,8 +603,7 @@ var split_payment_info = {
     split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
-    split_primary_receiver_fee: "10",
-    split_receivers: JSON.stringify([{id:"P_CUST_ID_CLIENTE 1ST RECEIVER",fee:"1000",fee_type: "01"}])
+    split_primary_receiver_fee: "10"
 }
 epayco.charge.create(split_payment_info)
     .then(function(charge) {
@@ -629,11 +626,11 @@ var split_payment_info = {
     split_type: "02",
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "0",
-    split_rule: "multiple",
+    split_rule: "multiple", // si se envía este campo el split_receivers se vuelve un campo obligatorio
     split_receivers: JSON.stringify([
         {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
         {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
-    ])
+    ]) // Campo obligatorio sí se envía split_rule
 }
 epayco.charge.create(split_payment_info)
     .then(function(charge) {
