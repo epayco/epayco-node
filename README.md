@@ -433,14 +433,14 @@ var cash_info = {
     method_confirmation: "GET",
 
     //Extra params: These params are optional and can be used by the commerce
-    extras: {
+
         extra1: "",
         extra2: "",
         extra3: "",
         extra4: "",
         extra5: "",
         extra6: ""
-    }
+
 }
 epayco.cash.create("efecty", cash_info)
     .then(function(cash) {
