@@ -327,7 +327,7 @@ var pse_info = {
     url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
 
-    //Extra params: These params are optional and can be used by the commerce
+    //Los parámetros extras deben ser enviados tipo string, si se envía tipo array generara error.
         extra1: "",
         extra2: "",
         extra3: "",
@@ -432,7 +432,7 @@ var cash_info = {
     url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
 
-    //Extra params: These params are optional and can be used by the commerce
+    //Los parámetros extras deben ser enviados tipo string, si se envía tipo array generara error.
 
         extra1: "",
         extra2: "",
@@ -555,7 +555,7 @@ var payment_info = {
     url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
 
-    //Extra params: These params are optional and can be used by the commerce
+    //Los parámetros extras deben ser enviados tipo string, si se envía tipo array generara error.
 
     use_default_card_customer: true,/*if the user wants to be charged with the card that the customer currently has as default = true*/
    
