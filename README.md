@@ -304,6 +304,18 @@ epayco.subscriptions.charge(subscription_info)
 ### PSE
 
 
+#### Listar bancos
+
+```javascript
+epayco.bank.getBanks()
+    .then(function(bank) {
+        console.log(bank);
+     })
+    .catch(function(err) {
+         console.log("err:" + err);
+     });
+```
+
 #### Create
 
 ```javascript
@@ -529,17 +541,6 @@ epayco.cash.create("efecty", split_cash_info)
 
 ### Payment
 
-#### Listar bancos
-
-```javascript
-epayco.bank.getBanks()
-    .then(function(bank) {
-        console.log(bank);
-     })
-    .catch(function(err) {
-         console.log("err:" + err);
-     });
-```
 #### Create
 
 ```javascript
