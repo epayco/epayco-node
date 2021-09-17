@@ -374,28 +374,8 @@ epayco.bank.get("ticketId")
 Previous requirements:
 https://docs.epayco.co/tools/split-payment
 
-#### Split 1-1
-```javascript
-var split_payment_info = {
-    //Other customary parameters...
-    splitpayment: "true",
-    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
-    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
-    split_type: "02",
-    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
-    split_primary_receiver_fee: "10"
-}
-epayco.bank.create(split_payment_info)
-    .then(function(charge) {
-        console.log(charge);
-    })
-    .catch(function(err) {
-        console.log("err: " + err);
-    });
-```
-#### Split Multiple:
-use the following attributes in case you need to do a dispersion with multiple providers
-
+#### Split payment
+use the following attributes in case you need to do a dispersion
 ```javascript
 var split_payment_info = {
     //Other customary parameters...
@@ -606,29 +586,8 @@ epayco.charge.get("transaction_id")
 Previous requirements:
 https://docs.epayco.co/tools/split-payment
 
-#### Split 1-1
-
-```javascript
-var split_payment_info = {
-    //Other customary parameters...
-    splitpayment: "true",
-    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
-    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
-    split_type: "02",
-    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
-    split_primary_receiver_fee: "10"
-}
-epayco.charge.create(split_payment_info)
-    .then(function(charge) {
-        console.log(charge);
-    })
-    .catch(function(err) {
-        console.log("err: " + err);
-    });
-```
-
-#### Split Multiple:
-use the following attributes in case you need to do a dispersion with multiple providers
+#### Split payment
+use the following attributes in case you need to do a dispersion with one or multiple providers
 
 ```javascript
 var split_payment_info = {
