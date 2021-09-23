@@ -303,6 +303,19 @@ epayco.subscriptions.charge(subscription_info)
 
 ### PSE
 
+
+#### Listar bancos
+
+```javascript
+epayco.bank.getBanks()
+    .then(function(bank) {
+        console.log(bank);
+     })
+    .catch(function(err) {
+         console.log("err:" + err);
+     });
+```
+
 #### Create
 
 ```javascript
@@ -325,9 +338,9 @@ var pse_info = {
     ip:"190.000.000.000", /*This is the client's IP, it is required */
     url_response: "https://ejemplo.com/respuesta.html",
     url_confirmation: "https://ejemplo.com/confirmacion",
-    method_confirmation: "GET",
+    metodoconfirmacion : "GET",
 
-    //Extra params: These params are optional and can be used by the commerce
+    //Los parámetros extras deben ser enviados tipo string, si se envía tipo array generara error.
         extra1: "",
         extra2: "",
         extra3: "",
@@ -361,28 +374,8 @@ epayco.bank.get("ticketId")
 Previous requirements:
 https://docs.epayco.co/tools/split-payment
 
-#### Split 1-1
-```javascript
-var split_payment_info = {
-    //Other customary parameters...
-    splitpayment: "true",
-    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
-    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
-    split_type: "02",
-    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
-    split_primary_receiver_fee: "10"
-}
-epayco.bank.create(split_payment_info)
-    .then(function(charge) {
-        console.log(charge);
-    })
-    .catch(function(err) {
-        console.log("err: " + err);
-    });
-```
-#### Split Multiple:
-use the following attributes in case you need to do a dispersion with multiple providers
-
+#### Split payment
+use the following attributes in case you need to do a dispersion
 ```javascript
 var split_payment_info = {
     //Other customary parameters...
@@ -393,10 +386,10 @@ var split_payment_info = {
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "0",
     split_rule: "multiple", // si se envía este parámetro split_receivers se vuelve obligatorio
-    split_receivers: JSON.stringify([
+    split_receivers: [
         {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
         {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
-    ]) // Campo obligatorio sí se envía el split_rule
+    ] // Campo obligatorio sí se envía el split_rule
 }
 epayco.bank.create(split_payment_info)
     .then(function(charge) {
@@ -432,15 +425,15 @@ var cash_info = {
     url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
 
-    //Extra params: These params are optional and can be used by the commerce
-    extras: {
+    //Los parámetros extras deben ser enviados tipo string, si se envía tipo array generara error.
+
         extra1: "",
         extra2: "",
         extra3: "",
         extra4: "",
         extra5: "",
         extra6: ""
-    }
+
 }
 epayco.cash.create("efecty", cash_info)
     .then(function(cash) {
@@ -510,10 +503,10 @@ var split_payment_info = {
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "0",
     split_rule: "multiple",// si se envía este campo el campo split_receivers sería obligatorio
-    split_receivers: JSON.stringify([
+    split_receivers: [
         {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
         {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
-    ]) // Campo obligatorio sí se envía el campo split_rule
+    ] // Campo obligatorio sí se envía el campo split_rule
 }
 epayco.cash.create("efecty", split_cash_info)
     .then(function(cash) {
@@ -555,7 +548,7 @@ var payment_info = {
     url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: "GET",
 
-    //Extra params: These params are optional and can be used by the commerce
+    //Los parámetros extras deben ser enviados tipo string, si se envía tipo array generara error.
 
     use_default_card_customer: true,/*if the user wants to be charged with the card that the customer currently has as default = true*/
    
@@ -593,29 +586,8 @@ epayco.charge.get("transaction_id")
 Previous requirements:
 https://docs.epayco.co/tools/split-payment
 
-#### Split 1-1
-
-```javascript
-var split_payment_info = {
-    //Other customary parameters...
-    splitpayment: "true",
-    split_app_id: "P_CUST_ID_CLIENTE APPLICATION",
-    split_merchant_id: "P_CUST_ID_CLIENTE COMMERCE",
-    split_type: "02",
-    split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
-    split_primary_receiver_fee: "10"
-}
-epayco.charge.create(split_payment_info)
-    .then(function(charge) {
-        console.log(charge);
-    })
-    .catch(function(err) {
-        console.log("err: " + err);
-    });
-```
-
-#### Split Multiple:
-use the following attributes in case you need to do a dispersion with multiple providers
+#### Split payment
+use the following attributes in case you need to do a dispersion with one or multiple providers
 
 ```javascript
 var split_payment_info = {
@@ -627,10 +599,10 @@ var split_payment_info = {
     split_primary_receiver: "P_CUST_ID_CLIENTE APPLICATION",
     split_primary_receiver_fee: "0",
     split_rule: "multiple", // si se envía este campo el split_receivers se vuelve un campo obligatorio
-    split_receivers: JSON.stringify([
+    split_receivers: [
         {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
         {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
-    ]) // Campo obligatorio sí se envía split_rule
+    ] // Campo obligatorio sí se envía split_rule
 }
 epayco.charge.create(split_payment_info)
     .then(function(charge) {
