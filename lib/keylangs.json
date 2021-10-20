@@ -5,6 +5,7 @@
     "description": "descripcion",
     "value": "valor",
     "tax": "iva",
+    "ico": "ico",
     "tax_base": "baseiva",
     "currency": "moneda",
     "email": "email",
