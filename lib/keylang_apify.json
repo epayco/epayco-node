@@ -1,4 +1,6 @@
 {
+    "cash": "cash",
+    "end_date": "expirationDate",
     "ref_payco": "refPayco",
     "id_session_token": "idSessionToken",
     "otp": "otp",

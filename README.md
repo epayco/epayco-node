@@ -647,11 +647,15 @@ epayco.daviplata.create(body)
 
 ### Confirm 
 
-```php
-$pay = $epayco->daviplata->confirm(array(
-    "ref_payco" => "45508846", // It is obtained from the create response
-    "id_session_token" => "45081749", // It is obtained from the create response
-    "otp" => "2580"
-));
+```javascript
+epayco.daviplata.confirm({
+    ref_payco: "45508846", // It is obtained from the create response
+    id_session_token: "45081749", // It is obtained from the create response
+    otp: "2580"
+}).then(function(daviplata){
+        console.log(daviplata);
+    }).catch(function(err){
+        console.log("err: "+ err);
+    })
 ```
 
