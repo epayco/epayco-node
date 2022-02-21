@@ -22,6 +22,7 @@
     "ip": "ip",
     "url_response": "url_respuesta",
     "url_confirmation": "url_confirmacion",
-    "method_confirmation": "metodoconfirmacion",
+    "method_confirmation": "method_confirmation",
+    "metodoconfirmacion": "metodoconfirmacion",
     "end_date": "fechaexpiracion"
 }
