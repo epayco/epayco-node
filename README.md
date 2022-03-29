@@ -423,7 +423,7 @@ var cash_info = {
     ip:"190.000.000.000", /*This is the client's IP, it is required */
     url_response: "https://ejemplo.com/respuesta.html",
     url_confirmation: "https://ejemplo.com/confirmacion",
-    method_confirmation: "GET",
+    metodoconfirmacion: "GET",
 
     //Los parámetros extras deben ser enviados tipo string, si se envía tipo array generara error.
 
@@ -613,3 +613,86 @@ epayco.charge.create(split_payment_info)
     });
 ```
 
+### Daviplata
+
+### Create
+
+```javascript
+var body = {
+    doc_type: "CC",
+    document: "1053814580414720",
+    name: "Testing",
+    last_name: "PAYCO",
+    email: "exmaple@epayco.co",
+    ind_country: "CO",
+    phone: "314853222200033",
+    country: "CO",
+    city: "bogota",
+    address: "Calle de prueba",
+    ip: "189.176.0.1",
+    currency: "COP",
+    description: "ejemplo de transaccion con daviplata",
+    value: "100",
+    tax: "0",
+    tax_base: "0",
+    method_confirmation: ""
+}
+epayco.daviplata.create(body)
+    .then(function(daviplata){
+        console.log(daviplata);
+    }).catch(function(err){
+        console.log("err: "+ err);
+    })
+```
+
+### Confirm 
+
+```javascript
+epayco.daviplata.confirm({
+    ref_payco: "45508846", // It is obtained from the create response
+    id_session_token: "45081749", // It is obtained from the create response
+    otp: "2580"
+}).then(function(daviplata){
+        console.log(daviplata);
+    }).catch(function(err){
+        console.log("err: "+ err);
+    })
+```
+
+### Safetypay
+
+## Create 
+
+```javascript
+var body = {
+    cash: "1",
+    end_date: "2021-08-05",
+    doc_type: "CC",
+    document: "123456789",
+    name: "Jhon",
+    last_name: "doe",
+    email: "jhon.doe@yopmail.com",
+    ind_country: "57",
+    phone: "3003003434",
+    country: "CO",
+    invoice: "fac-01", // opcional
+    city: "N/A",
+    address: "N/A",
+    ip: "192.168.100.100",
+    currency: "COP",
+    description: "Thu Jun 17 2021 11:37:01 GMT-0400 (hora de Venezuela)",
+    value: 100000,
+    tax: 0,
+    ico: 0,
+    tax_base: 0,
+    url_confirmation: "",
+    method_confirmation: ""
+}
+
+epayco.safetypay.create(body)
+    .then(function(safetypay){
+        console.log(safetypay);
+    }).catch(function(err){
+        console.log("err: "+ err);
+    })
+```
