@@ -334,6 +334,7 @@ var pse_info = {
     last_name: "PAYCO",
     email: "no-responder@payco.co",
     country: "CO",
+    city: "Bogota",
     cell_phone: "3010000001",
     ip:"190.000.000.000", /*This is the client's IP, it is required */
     url_response: "https://ejemplo.com/respuesta.html",
@@ -418,6 +419,8 @@ var cash_info = {
     name: "testing",
     last_name: "PAYCO",
     email: "test@mailinator.com",
+    country: "CO",
+    city: "bogota",
     cell_phone: "3010000001",
     end_date: "2020-12-05",
     ip:"190.000.000.000", /*This is the client's IP, it is required */
@@ -635,7 +638,16 @@ var body = {
     value: "100",
     tax: "0",
     tax_base: "0",
-    method_confirmation: ""
+    method_confirmation: "GET",
+    url_response: "https://ejemplo.com/respuesta.html",
+    url_confirmation: "https://ejemplo.com/confirmacion",
+    extra1: "",
+    extra2: "",
+    extra3: "",
+    extra4: "",
+    extra5: "",
+    extra6: ""
+    
 }
 epayco.daviplata.create(body)
     .then(function(daviplata){
@@ -686,7 +698,13 @@ var body = {
     ico: 0,
     tax_base: 0,
     url_confirmation: "",
-    method_confirmation: ""
+    method_confirmation: "",
+    extra1: "",
+    extra2: "",
+    extra3: "",
+    extra4: "",
+    extra5: "",
+    extra6: ""
 }
 
 epayco.safetypay.create(body)

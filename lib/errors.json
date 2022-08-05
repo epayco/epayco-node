@@ -36,7 +36,7 @@
         "EN": "[108] Error encrypting the data, please retry the operation"
     },
     "109": {
-        "ES": "[109] Método de pago en efectivo no válido, unicamnete soportados (efecty - baloto - gana)",
-        "EN": "[109] Unsupported payment method, we only support (efecty - baloto - gana)"
+        "ES": "[109] Método de pago en efectivo no válido, unicamnete soportados  efecty, gana, redservi, puntored, sured",
+        "EN": "[109] Unsupported payment method, we only support  efecty, gana, redservi, puntored, sured"
     }
 }
