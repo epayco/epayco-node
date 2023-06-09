@@ -25,7 +25,7 @@
     "dependencies": {
         "crypto-js": "^3.1.9-1",
         "ip": "^1.1.5",
-        "node-fetch": "^2.6.0"
+        "node-fetch": "^3.2.10"
     },
     "devDependencies": {
         "better-assert": "1.0.2",
