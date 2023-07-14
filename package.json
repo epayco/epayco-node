@@ -1,6 +1,6 @@
 {
     "name": "epayco-sdk-node",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "Epayco API client for node.js",
     "main": "lib/index.js",
     "scripts": {
@@ -24,8 +24,11 @@
     "license": "MIT",
     "dependencies": {
         "crypto-js": "^3.1.9-1",
+        "debug": "2.6.9",
         "ip": "^1.1.5",
-        "node-fetch": "^2.6.0"
+        "node-fetch": "^2.6.0",
+        "superagent": "^3.7.0",
+        "dotenv": "^16.3.1"
     },
     "devDependencies": {
         "better-assert": "1.0.2",
