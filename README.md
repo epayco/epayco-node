@@ -32,7 +32,8 @@ var credit_info = {
     "card[number]": "4575623182290326",
     "card[exp_year]": "2025",
     "card[exp_month]": "12",
-    "card[cvc]": "123"
+    "card[cvc]": "123",
+    "hasCvv": true //hasCvv: validar codigo de seguridad en la transacción 
 }
 epayco.token.create(credit_info)
     .then(function(token) {
