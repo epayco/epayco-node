@@ -1,8 +1,8 @@
 /**
  * Module dependencies
  */
-var util = require('util');
-var Resource = require('./');
+const util = require("node:util");
+const Resource = require(".");
 
 /**
  * Expose constructor
@@ -13,7 +13,7 @@ module.exports = token;
  * Customers constructor
  */
 function token(epayco) {
-    Resource.call(this, epayco);
+  Resource.call(this, epayco);
 }
 
 util.inherits(token, Resource);
@@ -23,6 +23,6 @@ util.inherits(token, Resource);
  * @param {Object} options
  * @api public
  */
-token.prototype.create = function(options) {
-    return this.request('post', '/v1/tokens', options, sw = false);
+token.prototype.create = function (options) {
+  return this.request("post", "/v1/tokens", options, (sw = false));
 };

@@ -1,61 +1,63 @@
-describe('Customers', function() {
-
-    describe('#create', function() {
-        it('Create customer', function(done) {
-            var customer_info = {
-                token_card: "toke_id",
-                name: "Joe Doe",
-                email: "joe@payco.co",
-                phone: "3005234321",
-                default: true
-            }
-            epayco.customers.create(customer_info)
-                .then(function(customer) {
-                    assert(customer);
-                })
-                .catch(function(err) {
-                    console.log("err: " + err);
-                });
+describe("Customers", () => {
+  describe("#create", () => {
+    it("Create customer", (done) => {
+      const customer_info = {
+        token_card: "toke_id",
+        name: "Joe Doe",
+        email: "joe@payco.co",
+        phone: "3005234321",
+        default: true,
+      };
+      epayco.customers
+        .create(customer_info)
+        .then((customer) => {
+          assert(customer);
+        })
+        .catch((err) => {
+          console.log(`err: ${err}`);
         });
     });
+  });
 
-    describe('#Retrieve', function() {
-        it('Retrieve customer', function(done) {
-            epayco.customers.get("id_customer")
-                .then(function(customer) {
-                    assert(customer);
-                })
-                .catch(function(err) {
-                    console.log("err: " + err);
-                });
+  describe("#Retrieve", () => {
+    it("Retrieve customer", (done) => {
+      epayco.customers
+        .get("id_customer")
+        .then((customer) => {
+          assert(customer);
+        })
+        .catch((err) => {
+          console.log(`err: ${err}`);
         });
     });
+  });
 
-    describe('#List', function() {
-        it('List customers', function(done) {
-            epayco.customers.list()
-                .then(function(customers) {
-                    assert(customers);
-                })
-                .catch(function(err) {
-                    console.log("err: " + err);
-                });
+  describe("#List", () => {
+    it("List customers", (done) => {
+      epayco.customers
+        .list()
+        .then((customers) => {
+          assert(customers);
+        })
+        .catch((err) => {
+          console.log(`err: ${err}`);
         });
     });
+  });
 
-    describe('#Update', function() {
-        it('Update customer', function(done) {
-            var update_customer_info = {
-                name: "Alex"
-            }
-            epayco.customers.update("id_customer", update_customer_info)
-                .then(function(customer) {
-                    assert(customer);
-                })
-                .catch(function(err) {
-                    console.log("err: " + err);
-                });
+  describe("#Update", () => {
+    it("Update customer", (done) => {
+      const update_customer_info = {
+        name: "Alex",
+      };
+      epayco.customers
+        .update("id_customer", update_customer_info)
+        .then((customer) => {
+          assert(customer);
+        })
+        .catch((err) => {
+          console.log(`err: ${err}`);
         });
     });
-
+  });
 });
