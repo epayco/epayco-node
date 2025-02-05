@@ -56,10 +56,10 @@ var customer_info = {
     email: "joe@payco.co",
     default: true,
     //Optional parameters: These parameters are important when validating the credit card transaction
+    country:"CO",
     city: "Bogota",
-    address: "Cr 4 # 55 36",
-    phone: "3005234321",
-    cell_phone: "3010000001"
+    address: "Cr 123 # 56 78",
+    phone: "3180000000"
 }
 epayco.customers.create(customer_info)
     .then(function(customer) {
