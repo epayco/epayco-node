@@ -1,5 +1,5 @@
 import Resource from './';
-import { GenericObject } from '../types';
+import { CustomerInfo, GenericObject } from '../types';
 
 class Customers extends Resource {
     constructor(epayco: any) {
@@ -11,7 +11,7 @@ class Customers extends Resource {
      * @param {Object} options
      * @api public
      */
-    public async create(options: GenericObject): Promise<any> {
+    public async create(options: CustomerInfo): Promise<any> {
         return this.request('post', '/payment/v1/customer/create', options, false);
     }
 

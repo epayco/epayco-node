@@ -1,5 +1,5 @@
 import Resource from './';
-import { EpaycoTokenResult, GenericObject } from '../types';
+import { EpaycoTokenResult, CreditCardInfo } from '../types';
 
 class Token extends Resource {
     constructor(epayco: any) {
@@ -11,7 +11,7 @@ class Token extends Resource {
      * @param {Object} options
      * @api public
      */
-    public async create(options: GenericObject): Promise<EpaycoTokenResult> {
+    public async create(options: CreditCardInfo): Promise<EpaycoTokenResult> {
         return this.request('post', '/v1/tokens', options, false);
     }
 }
