@@ -9,7 +9,9 @@ API to interact with Epayco <https://api.epayco.co>
 ## Installation
 
 ```bash
-npm i epayco-sdk-node-ts
+npm i @lifeworldb/epayco-sdk-node-ts
+
+yarn add
 ```
 
 ## Usage
