@@ -56,10 +56,10 @@ var customer_info = {
     email: "joe@payco.co",
     default: true,
     //Optional parameters: These parameters are important when validating the credit card transaction
-    country:"CO",
     city: "Bogota",
-    address: "Cr 123 # 56 78",
-    phone: "3180000000"
+    address: "Cr 4 # 55 36",
+    phone: "3005234321",
+    cell_phone: "3010000001"
 }
 epayco.customers.create(customer_info)
     .then(function(customer) {
@@ -85,7 +85,11 @@ epayco.customers.get("id_customer")
 #### List
 
 ```javascript
-epayco.customers.list()
+var customer_list = {
+    page: 6, //number of pages
+    perPage: 10 //number of customers per page
+}
+epayco.customers.list(customer_list)
     .then(function(customers) {
         console.log(customers);
     })
@@ -175,7 +179,19 @@ var plan_info = {
     currency: "cop",
     interval: "month",
     interval_count: 1,
-    trial_days: 30
+    trial_days: 30,
+    iva:5700,
+    ico:0,
+    planLink: "https://ejemplo.com/plan",
+    greetMessage: "Gracias por preferirnos",
+    linkExpirationDate:"2025-03-11",
+    subscriptionLimit:10,
+    imgUrl:"https://ejemplo.com/imagen",
+    discountValue:5000,
+    discountPercentage:19,
+    transactionalLimit:5,
+    additionalChargePercentage:0.0,
+    firstPaymentAdditionalCost:45700
 }
 epayco.plans.create(plan_info)
     .then(function(plan) {
@@ -208,6 +224,33 @@ epayco.plans.list()
     .catch(function(err) {
         console.log("err: " + err);
     });
+```
+
+#### Update
+
+```javascript
+var plan_info = {
+    name: "Course react js",
+    description: "Course react and redux",
+    amount: 11900,
+    currency: "cop",
+    interval: "month",
+    interval_count: 1,
+    trial_days: 0,
+    ip: "170.00.000.000",
+    iva: 1900,
+    ico: 0,
+    transactionalLimit: 3,
+    additionalChargePercentage:0.0,
+    afterPayment:"message after paying"
+}
+epayco.plans.update("id_plan",plan_info)
+.then(function(plan) {
+    console.log(plan);
+})
+.catch(function(err) {
+    console.log("err: " + err);
+});
 ```
 
 #### Remove
