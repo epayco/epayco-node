@@ -1,38 +1,61 @@
 {
-    "name": "epayco-sdk-node",
-    "version": "1.4.2",
-    "description": "Epayco API client for node.js",
-    "main": "lib/index.js",
-    "scripts": {
-        "test": "./node_modules/.bin/mocha --timeout 10000 --require test/common test/*.js",
-        "coverage": "./node_modules/istanbul/lib/cli.js cover _mocha -- test/*.js --require test/common --timeout 10000"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/epaco/epayco-node.git"
-    },
-    "keywords": [
-        "Epayco",
-        "API"
-    ],
-    "author": "Epayco <ricardo.saldarriaga@payco.co> (https://epayco.co)",
-    "contributors": [
-        "Jonathan Aguirre <jaguirre@payco.co>",
-        "Jeison Caro <jeison.caro@payco.co>",
-        "Ricardo Saldarriaga <ricardo.saldarriaga@payco.co>"
-    ],
-    "license": "MIT",
-    "dependencies": {
-        "crypto-js": "^4.2.0",
-        "debug": "2.6.9",
-        "dotenv": "^16.3.1",
-        "node-fetch": "^2.6.0",
-        "superagent": "^3.7.0",
-        "axios": "^1.8.2"
-    },
-    "devDependencies": {
-        "better-assert": "1.0.2",
-        "istanbul": "^0.4.5",
-        "mocha": "^10.7.0"
+  "name": "epayco-sdk-node",
+  "version": "1.4.2",
+  "description": "Epayco API client for node.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write --unsafe .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/epaco/epayco-node.git"
+  },
+  "keywords": [
+    "Epayco",
+    "API",
+    "payment",
+    "gateway"
+  ],
+  "author": "Epayco <ricardo.saldarriaga@payco.co> (https://epayco.co)",
+  "contributors": [
+    "Jonathan Aguirre <jaguirre@payco.co>",
+    "Jeison Caro <jeison.caro@payco.co>",
+    "Ricardo Saldarriaga <ricardo.saldarriaga@payco.co>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.5",
+    "@types/node": "^18.19.130",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
 }
