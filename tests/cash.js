@@ -355,4 +355,101 @@ describe('Cash', function() {
         });
     });
 
+    // A merchant can opt cash back into the pre-SDK-1352 legacy backend via
+    // `transactionMethods: ["cash"]`, mirroring the equivalent option already
+    // used by the Python SDK's ms-transaction migration (Epayco.gateway_for).
+    // Everything else (the default `epayco` global from tests/common.js) has
+    // no transactionMethods set, so it exercises the new ms-transaction flow
+    // as covered by every test above.
+    describe('legacy flow (transactionMethods opt-out)', function() {
+
+        it('usesLegacyFlow() reflects the transactionMethods option', function() {
+            assert(epayco.usesLegacyFlow('cash') === false);
+            var legacyEpayco = new Epayco({
+                apiKey: epayco.apiKey,
+                privateKey: epayco.privateKey,
+                lang: 'ES',
+                test: true,
+                transactionMethods: ['cash']
+            });
+            assert(legacyEpayco.usesLegacyFlow('cash') === true);
+            // opting cash into legacy doesn't opt every payment method in
+            assert(legacyEpayco.usesLegacyFlow('safetypay') === false);
+        });
+
+        it('create() calls the legacy secure.payco.co endpoint instead of ms-transaction', function(done) {
+            var legacyEpayco = new Epayco({
+                apiKey: epayco.apiKey,
+                privateKey: epayco.privateKey,
+                lang: 'ES',
+                test: true,
+                transactionMethods: ['cash']
+            });
+
+            var authScope = nock('https://api.secure.payco.co')
+                .post('/v1/auth/login')
+                .reply(200, { bearer_token: 'fake.legacy.token' });
+
+            var legacyScope = nock('https://secure.payco.co')
+                .post('/restpagos/v2/efectivo/gana')
+                .reply(200, { estado: 'Pendiente', ref_payco: '9999999' });
+
+            legacyEpayco.cash.create('gana', {
+                invoice: '1472050778',
+                value: '20000',
+                doc_type: 'CC',
+                doc_number: '10358519',
+                name: 'testing',
+                last_name: 'PAYCO',
+                email: 'test@mailinator.com',
+                cell_phone: '3010000001',
+                ip: '190.0.0.1'
+            })
+                .then(function(cash) {
+                    assert(cash);
+                    assert(cash.estado === 'Pendiente');
+                    assert(authScope.isDone());
+                    assert(legacyScope.isDone());
+                    done();
+                })
+                .catch(done);
+        });
+
+        it('get() calls the legacy secure.payco.co endpoint instead of ms-transaction', function(done) {
+            var legacyEpayco = new Epayco({
+                apiKey: epayco.apiKey,
+                privateKey: epayco.privateKey,
+                lang: 'ES',
+                test: true,
+                transactionMethods: ['cash']
+            });
+
+            var authScope = nock('https://api.secure.payco.co')
+                .post('/v1/auth/login')
+                .reply(200, { bearer_token: 'fake.legacy.token' });
+
+            // .get()'s internal data object always resolves its own IP (unlike
+            // .create(), which only does so when the caller didn't pass one) --
+            // pre-existing legacy behavior, unrelated to this ticket.
+            var ipScope = nock('https://api.ipify.org')
+                .get('/?format=json')
+                .reply(200, { ip: '190.0.0.1' });
+
+            var legacyScope = nock('https://secure.payco.co')
+                .get(/\/restpagos\/transaction\/response\.json.*/)
+                .reply(200, { estado: 'Pendiente', ref_payco: '9999999' });
+
+            legacyEpayco.cash.get('9999999')
+                .then(function(cash) {
+                    assert(cash);
+                    assert(cash.estado === 'Pendiente');
+                    assert(authScope.isDone());
+                    assert(ipScope.isDone());
+                    assert(legacyScope.isDone());
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
 });

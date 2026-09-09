@@ -459,6 +459,22 @@ epayco.bank.create(split_payment_info)
 > If your integration relies on either of these today, hold off upgrading
 > until this is confirmed with the ePayco team. Split payments (see below)
 > **are** supported.
+>
+> If you need to keep using the legacy `secure.payco.co` backend for cash
+> specifically (e.g. because of the two gaps above), opt out per-instance by
+> passing `transactionMethods: ["cash"]` when constructing the SDK -- the same
+> mechanism the Python SDK's own ms-transaction migration uses:
+>
+> ```javascript
+> var epayco = require('epayco-sdk-node')({
+>     apiKey: apiKey,
+>     privateKey: privateKey,
+>     lang: 'ES',
+>     test: true,
+>     transactionMethods: ["cash"] // cash stays on the legacy backend; every
+>                                   // other payment method is unaffected
+> });
+> ```
 
 #### Create
 
