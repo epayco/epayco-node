@@ -446,36 +446,6 @@ epayco.bank.create(split_payment_info)
 
 ### Cash
 
-> As of SDK-1352, `cash.create`/`cash.get` are backed by ePayco's new
-> ms-transaction microservice instead of the legacy `secure.payco.co`
-> endpoints. The option names below and the shape of what you get in
-> `.then()` are unchanged -- this is a routing change, not a public API
-> change -- **except** for two known gaps, not carried over from the legacy
-> flow because there is no verified equivalent in the new backend yet:
-> - `end_date` (voucher expiration) is not forwarded; expiration is decided
->   server-side per franchise.
-> - `type_person` is not forwarded.
->
-> If your integration relies on either of these today, hold off upgrading
-> until this is confirmed with the ePayco team. Split payments (see below)
-> **are** supported.
->
-> If you need to keep using the legacy `secure.payco.co` backend for cash
-> specifically (e.g. because of the two gaps above), opt out per-instance by
-> passing `transactionMethods: ["cash"]` when constructing the SDK -- the same
-> mechanism the Python SDK's own ms-transaction migration uses:
->
-> ```javascript
-> var epayco = require('epayco-sdk-node')({
->     apiKey: apiKey,
->     privateKey: privateKey,
->     lang: 'ES',
->     test: true,
->     transactionMethods: ["cash"] // cash stays on the legacy backend; every
->                                   // other payment method is unaffected
-> });
-> ```
-
 #### Create
 
 ```javascript
@@ -578,33 +548,11 @@ var split_payment_info = {
     split_primary_receiver_fee: "0",
     split_rule: "multiple",// si se envía este campo el campo split_receivers sería obligatorio
     split_receivers: JSON.stringify([
-        {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",baseTax:"50000", fee:"10"},
-        {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",baseTax:"50000", fee:"10"}
+        {id:"P_CUST_ID_CLIENTE 1ST RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"},
+        {id:"P_CUST_ID_CLIENTE 2ND RECEIVER",total:"58000",iva:"8000",base_iva:"50000", fee:"10"}
     ]) // Campo obligatorio sí se envía el campo split_rule
 }
-epayco.cash.create("efecty", split_payment_info)
-    .then(function(cash) {
-        console.log(cash);
-    })
-    .catch(function(err) {
-        console.log("err: " + err);
-    });
-```
-
-> `split_receivers` accepts either a `JSON.stringify`-ed string (as shown
-> above) or an already-parsed array -- both are handled the same way.
-
-#### Split by credits
-
-To split by credits instead of/alongside receivers, pass a `credits` option
-(forwarded as `paymentMethodData.credits`, a sibling of the cash franchise):
-
-```javascript
-var split_payment_info = {
-    //Other customary parameters, e.g. splitpayment/split_app_id/... as above...
-    credits: { number: "1" }
-}
-epayco.cash.create("efecty", split_payment_info)
+epayco.cash.create("efecty", split_cash_info)
     .then(function(cash) {
         console.log(cash);
     })
