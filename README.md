@@ -740,3 +740,15 @@ epayco.safetypay.create(body)
         console.log("err: "+ err);
     })
 ```
+
+#### Retrieve
+
+```javascript
+epayco.safetypay.get("refPayco")
+    .then(function(safetypay) {
+        console.log(safetypay);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
