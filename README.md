@@ -379,7 +379,7 @@ var pse_info = {
     email: "no-responder@payco.co",
     country: "CO",
     cell_phone: "3010000001",
-    ip:"190.000.000.000", /*This is the client's IP, it is required */
+    ip:"190.0.0.1", /*This is the client's IP, it is required */
     url_response: "https://ejemplo.com/respuesta.html",
     url_confirmation: "https://ejemplo.com/confirmacion",
     metodoconfirmacion : "GET",
@@ -463,8 +463,8 @@ var cash_info = {
     last_name: "PAYCO",
     email: "test@mailinator.com",
     cell_phone: "3010000001",
-    end_date: "2020-12-05",
-    ip:"190.000.000.000", /*This is the client's IP, it is required */
+    end_date: "2030-12-05", /*Must be a future date or the transaction is rejected*/
+    ip:"190.0.0.1", /*This is the client's IP, it is required */
     url_response: "https://ejemplo.com/respuesta.html",
     url_confirmation: "https://ejemplo.com/confirmacion",
     metodoconfirmacion: "GET",
@@ -664,19 +664,19 @@ epayco.charge.create(split_payment_info)
 ```javascript
 var body = {
     doc_type: "CC",
-    document: "1053814580414720",
+    document: "1053814580",
     name: "Testing",
     last_name: "PAYCO",
     email: "exmaple@epayco.co",
     ind_country: "CO",
-    phone: "314853222200033",
+    phone: "3148532222",
     country: "CO",
     city: "bogota",
     address: "Calle de prueba",
     ip: "189.176.0.1",
     currency: "COP",
     description: "ejemplo de transaccion con daviplata",
-    value: "100",
+    value: "6800", /*Must be above Daviplata's minimum transaction amount*/
     tax: "0",
     tax_base: "0",
     method_confirmation: ""
@@ -710,7 +710,7 @@ epayco.daviplata.confirm({
 ```javascript
 var body = {
     cash: "1",
-    end_date: "2021-08-05",
+    end_date: "2030-08-05", /*Must be a future date or the transaction is rejected*/
     doc_type: "CC",
     document: "123456789",
     name: "Jhon",
@@ -729,7 +729,8 @@ var body = {
     tax: 0,
     ico: 0,
     tax_base: 0,
-    url_confirmation: "",
+    url_response: "https://ejemplo.com/respuesta.html",
+    url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: ""
 }
 
