@@ -758,8 +758,7 @@ epayco.safetypay.get("refPayco")
 
 #### Refund
 
-Reverses/refunds an already-created transaction, regardless of which payment
-method created it (Cash, Bank/PSE, SafetyPay, Daviplata, or card). The
+Reverses/refunds an already-created **card (TDC)** transaction. The
 resulting status depends on the payment provider (e.g. "Retenida",
 "Reversada").
 
