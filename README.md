@@ -753,3 +753,34 @@ epayco.safetypay.get("refPayco")
         console.log("err: " + err);
     });
 ```
+
+### Transaction
+
+#### Refund
+
+Reverses/refunds an already-created transaction, regardless of which payment
+method created it (Cash, Bank/PSE, SafetyPay, Daviplata, or card). The
+resulting status depends on the payment provider (e.g. "Retenida",
+"Reversada").
+
+```javascript
+epayco.transaction.refund("refPayco")
+    .then(function(refund){
+        console.log(refund);
+    }).catch(function(err){
+        console.log("err: "+ err);
+    })
+```
+
+For BRE-B refunds, `key_payer` and `reason` are required:
+
+```javascript
+epayco.transaction.refund("refPayco", {
+    key_payer: "@EPY2345",
+    reason: "WRONG_PRODUCT" // one of: WRONG_CLIENT, WRONG_AMOUNT, DUPLICATE_TRANSFER, FRAUD, TECHNICAL_FAILURE, WRONG_PRODUCT, PRODUCT_NOT_RECEIVED
+}).then(function(refund){
+        console.log(refund);
+    }).catch(function(err){
+        console.log("err: "+ err);
+    })
+```
