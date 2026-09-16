@@ -565,6 +565,16 @@ epayco.cash.create("efecty", split_cash_info)
 
 ### Payment
 
+**PRELIMINARY:** `charge.create()` now goes through the new ms-transaction
+microservice by default instead of the legacy `/payment/v1/charge/create`
+endpoint. This is an early, exploratory integration (a single ad-hoc smoke
+test against real pre-prod, not a full QA pass) -- see
+`lib/gateways/msTransactionCharge.js`'s header comment for exactly what is
+and isn't verified yet (split payments, multi-payment/2TC, subscriptions,
+Apple Pay/Google Pay/Click to Pay, and a full field-by-field response
+comparison across every status are all untested). A merchant can opt back
+into the legacy backend with `transactionMethods: ["charge"]`.
+
 #### Create
 
 ```javascript
