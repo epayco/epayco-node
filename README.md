@@ -720,7 +720,7 @@ epayco.daviplata.confirm({
 ```javascript
 var body = {
     cash: "1",
-    end_date: "2030-08-05", /*Must be a future date or the transaction is rejected*/
+    end_date: "2026-10-01", /*Must be a future date no more than 15 days out, or the transaction is rejected*/
     doc_type: "CC",
     document: "123456789",
     name: "Jhon",
