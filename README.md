@@ -379,7 +379,7 @@ var pse_info = {
     email: "no-responder@payco.co",
     country: "CO",
     cell_phone: "3010000001",
-    ip:"190.000.000.000", /*This is the client's IP, it is required */
+    ip:"190.0.0.1", /*This is the client's IP, it is required */
     url_response: "https://ejemplo.com/respuesta.html",
     url_confirmation: "https://ejemplo.com/confirmacion",
     metodoconfirmacion : "GET",
@@ -463,8 +463,8 @@ var cash_info = {
     last_name: "PAYCO",
     email: "test@mailinator.com",
     cell_phone: "3010000001",
-    end_date: "2020-12-05",
-    ip:"190.000.000.000", /*This is the client's IP, it is required */
+    end_date: "2030-12-05", /*Must be a future date or the transaction is rejected*/
+    ip:"190.0.0.1", /*This is the client's IP, it is required */
     url_response: "https://ejemplo.com/respuesta.html",
     url_confirmation: "https://ejemplo.com/confirmacion",
     metodoconfirmacion: "GET",
@@ -565,6 +565,16 @@ epayco.cash.create("efecty", split_cash_info)
 
 ### Payment
 
+**PRELIMINARY:** `charge.create()` now goes through the new ms-transaction
+microservice by default instead of the legacy `/payment/v1/charge/create`
+endpoint. This is an early, exploratory integration (a single ad-hoc smoke
+test against real pre-prod, not a full QA pass) -- see
+`lib/gateways/msTransactionCharge.js`'s header comment for exactly what is
+and isn't verified yet (split payments, multi-payment/2TC, subscriptions,
+Apple Pay/Google Pay/Click to Pay, and a full field-by-field response
+comparison across every status are all untested). A merchant can opt back
+into the legacy backend with `transactionMethods: ["charge"]`.
+
 #### Create
 
 ```javascript
@@ -664,19 +674,19 @@ epayco.charge.create(split_payment_info)
 ```javascript
 var body = {
     doc_type: "CC",
-    document: "1053814580414720",
+    document: "1053814580",
     name: "Testing",
     last_name: "PAYCO",
     email: "exmaple@epayco.co",
     ind_country: "CO",
-    phone: "314853222200033",
+    phone: "3148532222",
     country: "CO",
     city: "bogota",
     address: "Calle de prueba",
     ip: "189.176.0.1",
     currency: "COP",
     description: "ejemplo de transaccion con daviplata",
-    value: "100",
+    value: "6800", /*Must be above Daviplata's minimum transaction amount*/
     tax: "0",
     tax_base: "0",
     method_confirmation: ""
@@ -710,7 +720,7 @@ epayco.daviplata.confirm({
 ```javascript
 var body = {
     cash: "1",
-    end_date: "2021-08-05",
+    end_date: "2030-08-05", /*Must be a future date or the transaction is rejected*/
     doc_type: "CC",
     document: "123456789",
     name: "Jhon",
@@ -729,13 +739,56 @@ var body = {
     tax: 0,
     ico: 0,
     tax_base: 0,
-    url_confirmation: "",
+    url_response: "https://ejemplo.com/respuesta.html",
+    url_confirmation: "https://ejemplo.com/confirmacion",
     method_confirmation: ""
 }
 
 epayco.safetypay.create(body)
     .then(function(safetypay){
         console.log(safetypay);
+    }).catch(function(err){
+        console.log("err: "+ err);
+    })
+```
+
+#### Retrieve
+
+```javascript
+epayco.safetypay.get("refPayco")
+    .then(function(safetypay) {
+        console.log(safetypay);
+    })
+    .catch(function(err) {
+        console.log("err: " + err);
+    });
+```
+
+### Transaction
+
+#### Refund
+
+Reverses/refunds an already-created **card (TDC)** transaction. The
+resulting status depends on the payment provider (e.g. "Retenida",
+"Reversada").
+
+```javascript
+epayco.transaction.refund("refPayco")
+    .then(function(refund){
+        console.log(refund);
+    }).catch(function(err){
+        console.log("err: "+ err);
+    })
+```
+
+For BRE-B refunds, `key_payer` and `reason` are required:
+
+```javascript
+epayco.transaction.refund("refPayco", {
+    key_payer: "@EPY2345",
+    reason: "WRONG_PRODUCT" // one of: WRONG_CLIENT, WRONG_AMOUNT, DUPLICATE_TRANSFER, FRAUD, TECHNICAL_FAILURE, WRONG_PRODUCT, PRODUCT_NOT_RECEIVED
+}).then(function(refund){
+        console.log(refund);
     }).catch(function(err){
         console.log("err: "+ err);
     })
