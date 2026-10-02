@@ -236,12 +236,18 @@ describe('Safetypay', function() {
             var raw = { success: false, message: 'Invalid document', data: {} };
             var mapped = msTransactionSafetypay.mapToLegacyShape(raw, {});
 
+            // buildLegacyErrorShape deliberately fabricates no transaction
+            // data on the error path, so there is no `data` block at all
+            // unless the backend itself sent structured errors. Verified
+            // against the real rejection responses BOTH flows return for a
+            // SafetyPay request (legacy apify and ms-transaction agree on
+            // this shape: titleResponse 'Error', the message in
+            // textResponse).
             assert(mapped.success === false);
-            assert(mapped.titleResponse === raw.message);
-            assert(mapped.data.urlBank === '');
-            assert(mapped.data.codResponse === '');
-            assert(mapped.data.codError === '');
-            assert(mapped.data.country === 'CO');
+            assert(mapped.titleResponse === 'Error');
+            assert(mapped.textResponse === raw.message);
+            assert(mapped.lastAction === 'validation transaction');
+            assert(mapped.data === undefined);
         });
     });
 
